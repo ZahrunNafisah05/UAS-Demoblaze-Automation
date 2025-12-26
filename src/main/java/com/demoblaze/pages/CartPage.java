@@ -23,14 +23,12 @@ public class CartPage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    // Tambah produk ke cart
     public void addProductToCart() {
         wait.until(ExpectedConditions.elementToBeClickable(addToCartBtn)).click();
         wait.until(ExpectedConditions.alertIsPresent());
         driver.switchTo().alert().accept();
     }
 
-    // Buka halaman cart
     public void openCart() {
         wait.until(ExpectedConditions.elementToBeClickable(cartMenu)).click();
 
@@ -41,7 +39,6 @@ public class CartPage {
         }
     }
 
-    // Ambil nama produk pertama
     public String getFirstProductName() {
         List<WebElement> rows = driver.findElements(cartRows);
         if (rows.size() > 0) {
@@ -50,7 +47,6 @@ public class CartPage {
         return null;
     }
 
-    // Hapus produk pertama
     public void deleteFirstProduct() {
         List<WebElement> rows = driver.findElements(cartRows);
         if (rows.size() > 0) {
@@ -62,7 +58,6 @@ public class CartPage {
         }
     }
 
-    // Cek produk ada di cart
     public boolean isProductInCart(String productName) {
         List<WebElement> rows = driver.findElements(cartRows);
         for (WebElement row : rows) {
@@ -74,7 +69,6 @@ public class CartPage {
         return false;
     }
 
-    // Hitung jumlah row
     public int getCartRowCount() {
         return driver.findElements(cartRows).size();
     }

@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 
 public class BaseTest {
 
-    protected static ExtentReports extent; // satu instance untuk semua test class
+    protected static ExtentReports extent;
     protected WebDriver driver;
     protected ExtentTest test;
 
@@ -33,6 +33,6 @@ public class BaseTest {
 
     @AfterAll
     static void tearDownAll() {
-        extent.flush(); // flush sekali di akhir semua test
+        extent.flush();
     }
 }
