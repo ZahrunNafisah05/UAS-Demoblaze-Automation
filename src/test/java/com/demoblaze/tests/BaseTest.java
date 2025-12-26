@@ -3,12 +3,10 @@ package com.demoblaze.tests;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.demoblaze.utils.ExtentReportManager;
+import com.demoblaze.pages.BasePage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.Dimension;
-
 
 public class BaseTest {
 
@@ -17,21 +15,14 @@ public class BaseTest {
     protected ExtentTest test;
 
     @BeforeEach
-    public void setUp() {
-
-        extent = ExtentReportManager.getExtent();
-        test = extent.createTest(this.getClass().getSimpleName());
-
-        driver = new ChromeDriver();
-
-        driver.manage().window().setSize(new Dimension(1366, 768));
-
-        driver.get("https://www.demoblaze.com");
+    void setup() {
+        driver = BasePage.openBrowser();
+        extent = ExtentReportManager.getInstance();
     }
 
     @AfterEach
-    public void tearDown() {
-        extent.flush();   // WAJIB agar HTML tersimpan
+    void tearDown() {
+        extent.flush();
         driver.quit();
     }
 }

@@ -1,27 +1,31 @@
 package com.demoblaze.utils;
 
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-
+import com.aventstack.extentreports.ExtentTest;
+import org.openqa.selenium.*;
 import java.io.File;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class ScreenshotUtil {
 
-    public static void capture(WebDriver driver, String fileName) {
+    public static void capture(WebDriver driver, ExtentTest test, String stepName) {
         try {
             File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
-            Path destDir = Paths.get("src/test/resources/screenshots");
+            String dir = "target/screenshots";
+            Files.createDirectories(Paths.get(dir));
 
-            Files.createDirectories(destDir);
+            // Format timestamp: yyyyMMdd_HHmmss
+            String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
 
-            Path destFile = destDir.resolve(fileName + ".png");
+            // Gabungkan stepName + timestamp
+            String path = dir + "/" + stepName + "_" + timestamp + ".png";
 
-            Files.copy(src.toPath(), destFile);
+            Files.copy(src.toPath(), Paths.get(path));
+
+            test.addScreenCaptureFromPath(path);
 
         } catch (Exception e) {
             e.printStackTrace();

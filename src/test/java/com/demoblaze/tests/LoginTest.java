@@ -7,15 +7,15 @@ import org.junit.jupiter.api.Test;
 public class LoginTest extends BaseTest {
 
     @Test
-    void testLogin() throws InterruptedException {
+    void testLogin() {
+
+        test = extent.createTest("Login Test");
 
         LoginPage login = new LoginPage(driver);
-
         login.login("demoblaze", "demoblaze");
 
-        Thread.sleep(3000);
-        ScreenshotUtil.capture(driver, "01_login_success");
+        ScreenshotUtil.capture(driver, test, "login_success");
 
-        test.pass("Login berhasil menggunakan akun valid");
+        test.pass("Login berhasil");
     }
 }

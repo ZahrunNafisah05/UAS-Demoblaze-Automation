@@ -8,6 +8,7 @@ public class PurchaseTest extends BaseTest {
 
     @Test
     void testPurchaseFlow() {
+        test = extent.createTest("Purchase Flow Test");
 
         LoginPage login = new LoginPage(driver);
         ProductPage product = new ProductPage(driver);
@@ -15,19 +16,25 @@ public class PurchaseTest extends BaseTest {
         PurchasePage purchase = new PurchasePage(driver);
 
         login.login("demoblaze", "demoblaze");
-        ScreenshotUtil.capture(driver, "01_login_success");
+        ScreenshotUtil.capture(driver, test, "login_page_filled");
+        test.pass("Login berhasil");
 
         product.selectProduct();
-        ScreenshotUtil.capture(driver, "02_product_page");
+        ScreenshotUtil.capture(driver, test, "product_page_filled");
+        test.pass("Product dipilih");
 
         cart.addProductToCart();
-        ScreenshotUtil.capture(driver, "03_add_to_cart");
+        ScreenshotUtil.capture(driver, test, "add_to_cart_success");
+        test.pass("Produk berhasil ditambahkan ke cart");
 
         cart.openCart();
-        ScreenshotUtil.capture(driver, "04_cart_page");
+        ScreenshotUtil.capture(driver, test, "cart_page_opened");
+        test.pass("Cart dibuka");
 
         purchase.placeOrder();
-        ScreenshotUtil.capture(driver, "05_purchase_success");
+        ScreenshotUtil.capture(driver, test, "purchase_completed");
+        test.pass("Order berhasil dilakukan");
     }
+
 }
 
