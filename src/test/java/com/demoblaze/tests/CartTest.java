@@ -37,4 +37,35 @@ public class CartTest extends BaseTest {
         ScreenshotUtil.capture(driver, test, "cart_page_opened");
         test.pass("Halaman cart berhasil dibuka");
     }
+    @Test
+    void testDeleteProductFromCart() {
+
+        test = extent.createTest("TC_CART_002 - Delete Product from Cart");
+
+        LoginPage login = new LoginPage(driver);
+        ProductPage product = new ProductPage(driver);
+        CartPage cart = new CartPage(driver);
+
+        login.login("demoblaze", "demoblaze");
+        ScreenshotUtil.capture(driver, test, "login_page_filled");
+        test.pass("Login berhasil");
+
+        product.selectProduct();
+        ScreenshotUtil.capture(driver, test, "product_page_filled");
+        test.pass("Produk berhasil dipilih");
+
+        cart.addProductToCart();
+        ScreenshotUtil.capture(driver, test, "add_to_cart_success");
+        test.pass("Produk berhasil ditambahkan ke cart");
+
+        cart.openCart();
+        ScreenshotUtil.capture(driver, test, "cart_page_opened");
+        test.pass("Halaman cart berhasil dibuka");
+
+        cart.deleteFirstProduct();
+        ScreenshotUtil.capture(driver, test, "product_deleted");
+        test.pass("Salah satu produk dihapus dari cart");
+
+    }
+
 }

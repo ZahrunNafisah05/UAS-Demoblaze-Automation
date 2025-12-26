@@ -18,4 +18,16 @@ public class LoginTest extends BaseTest {
 
         test.pass("Login berhasil");
     }
+    @Test
+    void testLoginfail() {
+
+        test = extent.createTest("Login Test Fail");
+
+        LoginPage login = new LoginPage(driver);
+        login.login("admin", "admin");
+
+        ScreenshotUtil.capture(driver, test, "login_failed");
+
+        test.pass("Login gagal");
+    }
 }

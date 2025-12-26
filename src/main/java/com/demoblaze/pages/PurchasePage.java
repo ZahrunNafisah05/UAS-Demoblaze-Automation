@@ -41,4 +41,9 @@ public class PurchasePage {
 
         driver.findElement(purchaseBtn).click();
     }
+    public void placeOrderWithoutData() {
+        wait.until(ExpectedConditions.elementToBeClickable(placeOrderBtn)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(purchaseBtn)).click();
+    }
+
 }

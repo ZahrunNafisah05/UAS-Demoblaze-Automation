@@ -35,6 +35,26 @@ public class PurchaseTest extends BaseTest {
         ScreenshotUtil.capture(driver, test, "purchase_completed");
         test.pass("Order berhasil dilakukan");
     }
+    @Test
+    void testPurchaseWithoutBuyerData() {
+        test = extent.createTest("Purchase Flow Test - Without Buyer Data");
+
+        LoginPage login = new LoginPage(driver);
+        CartPage cart = new CartPage(driver);
+        PurchasePage purchase = new PurchasePage(driver);
+
+        login.login("demoblaze", "demoblaze");
+        ScreenshotUtil.capture(driver, test, "login_page_filled");
+        test.pass("Login berhasil");
+
+        cart.openCart();
+        ScreenshotUtil.capture(driver, test, "cart_page_opened");
+        test.pass("Cart dibuka");
+
+        purchase.placeOrderWithoutData(); // pastikan metode ini hanya klik "Purchase" tanpa isi form
+        ScreenshotUtil.capture(driver, test, "purchase_attempted_without_data");
+        test.pass("Order dicoba dilakukan tanpa mengisi data pembeli");
+    }
 
 }
 
