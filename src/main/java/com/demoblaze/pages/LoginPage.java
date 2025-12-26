@@ -21,7 +21,7 @@ public class LoginPage {
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20)); // lebih aman
     }
 
     public void login(String user, String pass) {
@@ -30,6 +30,8 @@ public class LoginPage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(username));
         driver.findElement(username).sendKeys(user);
         driver.findElement(password).sendKeys(pass);
+
+        wait.until(ExpectedConditions.elementToBeClickable(loginBtn));
         driver.findElement(loginBtn).click();
 
         try {
@@ -38,6 +40,7 @@ public class LoginPage {
             System.out.println("LOGIN ALERT: " + alert.getText());
             alert.accept();
         } catch (TimeoutException e) {
+            // lanjut jika tidak ada alert
         }
     }
 }

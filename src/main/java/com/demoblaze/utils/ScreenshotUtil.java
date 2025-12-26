@@ -14,18 +14,17 @@ public class ScreenshotUtil {
         try {
             File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
-            String dir = "target/screenshots";
+            String projectDir = System.getProperty("user.dir");
+            String dir = projectDir + "/src/test/resources/screenshots";
             Files.createDirectories(Paths.get(dir));
 
-            // Format timestamp: yyyyMMdd_HHmmss
             String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
-
-            // Gabungkan stepName + timestamp
             String path = dir + "/" + stepName + "_" + timestamp + ".png";
 
             Files.copy(src.toPath(), Paths.get(path));
 
             test.addScreenCaptureFromPath(path);
+            System.out.println("Screenshot tersimpan di: " + path);
 
         } catch (Exception e) {
             e.printStackTrace();
