@@ -51,7 +51,7 @@ public class PurchaseTest extends BaseTest {
         ScreenshotUtil.capture(driver, test, "cart_page_opened");
         test.pass("Cart dibuka");
 
-        purchase.placeOrderWithoutData(); // pastikan metode ini hanya klik "Purchase" tanpa isi form
+        purchase.placeOrderWithoutData();
         ScreenshotUtil.capture(driver, test, "purchase_attempted_without_data");
         test.pass("Order dicoba dilakukan tanpa mengisi data pembeli");
     }
